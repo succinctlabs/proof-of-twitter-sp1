@@ -3,7 +3,8 @@ use actix_web::{post, web, web::PayloadConfig, App, HttpResponse, HttpServer, Re
 use http::StatusCode;
 use serde::{Deserialize, Serialize};
 use serde_json;
-use sp1_sdk::{ProverClient, SP1ProofWithMetadata, SP1Stdin};
+use sp1_sdk::{ProverClient, SP1Stdin};
+use sp1_prover::{SP1ProofWithMetadata};
 use std::fs;
 use std::process::Command;
 use tokio::task;
@@ -134,7 +135,7 @@ fn generate_proof(dkim: &DKIM, eth_address: String) {
     let client = ProverClient::new();
     let (pk, vk) = client.setup(ELF);
     println!("Generating proof...");
-    let mut proof = client.prove(&pk, stdin).expect("proving failed");
+    let mut proof = client.prove(&pk, stdin).compressed().run().expect("proving failed");
     println!("Proof finished generating");
 
     // Read output.
@@ -178,7 +179,7 @@ fn verify_proof() -> VerificationResult {
     println!("Twitter proven: {}", twitter_proven);
 
     // Verify proof.
-    if client.verify(&proof, &vk).is_ok() {
+    if client.verify(&proof.proof, &vk).is_ok() {
         VerificationResult {
             twitter_handle: twitter_username,
             eth_address: verified_address,
