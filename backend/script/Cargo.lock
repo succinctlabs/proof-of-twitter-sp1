@@ -4894,6 +4894,7 @@ dependencies = [
 [[package]]
 name = "sp1-core-executor"
 version = "2.0.0"
+source = "git+https://github.com/succinctlabs/sp1.git?branch=uma-dayal/rsa#cfafbac7b6a31a5d7f24aa4651d2f72a43f4bfd2"
 dependencies = [
  "bincode",
  "bytemuck",
@@ -4930,6 +4931,7 @@ dependencies = [
 [[package]]
 name = "sp1-core-machine"
 version = "2.0.0"
+source = "git+https://github.com/succinctlabs/sp1.git?branch=uma-dayal/rsa#cfafbac7b6a31a5d7f24aa4651d2f72a43f4bfd2"
 dependencies = [
  "anyhow",
  "arrayref",
@@ -4993,6 +4995,7 @@ dependencies = [
 [[package]]
 name = "sp1-curves"
 version = "2.0.0"
+source = "git+https://github.com/succinctlabs/sp1.git?branch=uma-dayal/rsa#cfafbac7b6a31a5d7f24aa4651d2f72a43f4bfd2"
 dependencies = [
  "curve25519-dalek",
  "dashu",
@@ -5023,6 +5026,7 @@ dependencies = [
 [[package]]
 name = "sp1-derive"
 version = "2.0.0"
+source = "git+https://github.com/succinctlabs/sp1.git?branch=uma-dayal/rsa#cfafbac7b6a31a5d7f24aa4651d2f72a43f4bfd2"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -5039,6 +5043,7 @@ dependencies = [
 [[package]]
 name = "sp1-primitives"
 version = "2.0.0"
+source = "git+https://github.com/succinctlabs/sp1.git?branch=uma-dayal/rsa#cfafbac7b6a31a5d7f24aa4651d2f72a43f4bfd2"
 dependencies = [
  "bincode",
  "hex",
@@ -5056,6 +5061,7 @@ dependencies = [
 [[package]]
 name = "sp1-prover"
 version = "2.0.0"
+source = "git+https://github.com/succinctlabs/sp1.git?branch=uma-dayal/rsa#cfafbac7b6a31a5d7f24aa4651d2f72a43f4bfd2"
 dependencies = [
  "anyhow",
  "bincode",
@@ -5096,6 +5102,7 @@ dependencies = [
 [[package]]
 name = "sp1-recursion-circuit-v2"
 version = "2.0.0"
+source = "git+https://github.com/succinctlabs/sp1.git?branch=uma-dayal/rsa#cfafbac7b6a31a5d7f24aa4651d2f72a43f4bfd2"
 dependencies = [
  "bincode",
  "hashbrown 0.14.5",
@@ -5133,6 +5140,7 @@ dependencies = [
 [[package]]
 name = "sp1-recursion-compiler"
 version = "2.0.0"
+source = "git+https://github.com/succinctlabs/sp1.git?branch=uma-dayal/rsa#cfafbac7b6a31a5d7f24aa4651d2f72a43f4bfd2"
 dependencies = [
  "backtrace",
  "itertools 0.13.0",
@@ -5161,6 +5169,7 @@ dependencies = [
 [[package]]
 name = "sp1-recursion-core"
 version = "2.0.0"
+source = "git+https://github.com/succinctlabs/sp1.git?branch=uma-dayal/rsa#cfafbac7b6a31a5d7f24aa4651d2f72a43f4bfd2"
 dependencies = [
  "arrayref",
  "backtrace",
@@ -5197,6 +5206,7 @@ dependencies = [
 [[package]]
 name = "sp1-recursion-core-v2"
 version = "2.0.0"
+source = "git+https://github.com/succinctlabs/sp1.git?branch=uma-dayal/rsa#cfafbac7b6a31a5d7f24aa4651d2f72a43f4bfd2"
 dependencies = [
  "arrayref",
  "backtrace",
@@ -5236,6 +5246,7 @@ dependencies = [
 [[package]]
 name = "sp1-recursion-derive"
 version = "2.0.0"
+source = "git+https://github.com/succinctlabs/sp1.git?branch=uma-dayal/rsa#cfafbac7b6a31a5d7f24aa4651d2f72a43f4bfd2"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -5245,6 +5256,7 @@ dependencies = [
 [[package]]
 name = "sp1-recursion-gnark-ffi"
 version = "2.0.0"
+source = "git+https://github.com/succinctlabs/sp1.git?branch=uma-dayal/rsa#cfafbac7b6a31a5d7f24aa4651d2f72a43f4bfd2"
 dependencies = [
  "anyhow",
  "bincode",
@@ -5270,6 +5282,7 @@ dependencies = [
 [[package]]
 name = "sp1-sdk"
 version = "2.0.0"
+source = "git+https://github.com/succinctlabs/sp1.git?branch=uma-dayal/rsa#cfafbac7b6a31a5d7f24aa4651d2f72a43f4bfd2"
 dependencies = [
  "alloy-sol-types",
  "anyhow",
@@ -5316,6 +5329,7 @@ dependencies = [
 [[package]]
 name = "sp1-stark"
 version = "2.0.0"
+source = "git+https://github.com/succinctlabs/sp1.git?branch=uma-dayal/rsa#cfafbac7b6a31a5d7f24aa4651d2f72a43f4bfd2"
 dependencies = [
  "arrayref",
  "getrandom",
