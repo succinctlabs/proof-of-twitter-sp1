@@ -29,7 +29,9 @@ pub fn main() {
     let dkim = sp1_zkvm::io::read::<DKIM>();
     let crypto_address = sp1_zkvm::io::read::<String>();
     let fwd: dense::DFA<&[u32]> = dense::DFA::from_bytes(&DFA_FWD_BYTES).expect("Failed to convert bytes to DFA").0;
-    println!("fwd"); // somehow when I remove this print statement, the next line has a deserialization error
+    // Somehow when I remove this print statement, the next line has a deserialization 
+    // error.  TODO:  Figure out how to get this working without the println.
+    println!("fwd"); 
     let rev: dense::DFA<&[u32]> = dense::DFA::from_bytes(&DFA_REV_BYTES).expect("Failed to convert bytes to DFA").0;
     let re = AutomataRegex::builder().build_from_dfas(fwd, rev);
 
