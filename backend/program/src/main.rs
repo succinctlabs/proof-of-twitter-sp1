@@ -21,6 +21,7 @@ struct DKIM {
     modulus_length: u32, // unused
 }
 
+// The seriallized DFA regex for "This email was meant for (@\w+)"
 const DFA_FWD_BYTES: &[u8] = include_bytes!("../../../generate_regex_bin/dfa_fwd_bytes.bin");
 const DFA_REV_BYTES: &[u8] = include_bytes!("../../../generate_regex_bin/dfa_rev_bytes.bin");
 

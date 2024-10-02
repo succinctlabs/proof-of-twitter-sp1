@@ -535,7 +535,7 @@ dependencies = [
  "rand_core",
  "signature",
  "sp1-derive",
- "sp1-lib",
+ "sp1-lib 2.0.0 (git+https://github.com/succinctlabs/sp1.git?branch=uma-dayal/rsa)",
  "spki",
  "subtle",
  "zeroize",
@@ -647,9 +647,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "sp1-lib"
+version = "2.0.0"
+source = "git+https://github.com/succinctlabs/sp1.git#3947eee6eb81eeee190cde2596b3c6e2f74ae4ba"
+dependencies = [
+ "anyhow",
+ "bincode",
+ "cfg-if",
+ "hex",
+ "serde",
+ "snowbridge-amcl",
+]
+
+[[package]]
 name = "sp1-zkvm"
 version = "2.0.0"
-source = "git+https://github.com/succinctlabs/sp1.git?branch=uma-dayal/rsa#cfafbac7b6a31a5d7f24aa4651d2f72a43f4bfd2"
+source = "git+https://github.com/succinctlabs/sp1.git#3947eee6eb81eeee190cde2596b3c6e2f74ae4ba"
 dependencies = [
  "bincode",
  "cfg-if",
@@ -660,7 +673,7 @@ dependencies = [
  "rand",
  "serde",
  "sha2",
- "sp1-lib",
+ "sp1-lib 2.0.0 (git+https://github.com/succinctlabs/sp1.git)",
 ]
 
 [[package]]
