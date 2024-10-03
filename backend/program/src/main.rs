@@ -2,7 +2,7 @@
 sp1_zkvm::entrypoint!(main);
 use base64::prelude::*;
 use regex::Regex;
-use regex_automata::{dfa::{Automaton, dense, regex::Regex as AutomataRegex}, Match};
+use regex_automata::{dfa::{Automaton, dense, regex::Regex as AutomataRegex}, Match, util::{lazy::Lazy, wire::AlignAs},};
 use rsa::{pkcs8::DecodePublicKey, Pkcs1v15Sign, RsaPublicKey};
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
@@ -21,17 +21,24 @@ struct DKIM {
     modulus_length: u32, // unused
 }
 
-// The seriallized DFA regex for "This email was meant for (@\w+)"
-const DFA_FWD_BYTES: &[u8] = include_bytes!("../../../generate_regex_bin/dfa_fwd_bytes.bin");
-const DFA_REV_BYTES: &[u8] = include_bytes!("../../../generate_regex_bin/dfa_rev_bytes.bin");
+static FWD_ALIGNED: &AlignAs<[u8], u32> = &AlignAs {
+    _align: [],
+    #[cfg(target_endian = "little")]
+    bytes: *include_bytes!("../../../generate_regex_bin/dfa_fwd_bytes.bin"),
+};
+static REV_ALIGNED: &AlignAs<[u8], u32> = &AlignAs {
+    _align: [],
+    #[cfg(target_endian = "little")]
+    bytes: *include_bytes!("../../../generate_regex_bin/dfa_rev_bytes.bin"),
+};
+
+static DFA_FWD_BYTES: &[u8] = &FWD_ALIGNED.bytes;
+static DFA_REV_BYTES: &[u8] = &REV_ALIGNED.bytes;
 
 pub fn main() {
     let dkim = sp1_zkvm::io::read::<DKIM>();
     let crypto_address = sp1_zkvm::io::read::<String>();
     let fwd: dense::DFA<&[u32]> = dense::DFA::from_bytes(&DFA_FWD_BYTES).expect("Failed to convert bytes to DFA").0;
-    // Somehow when I remove this print statement, the next line has a deserialization 
-    // error.  TODO:  Figure out how to get this working without the println.
-    println!("fwd"); 
     let rev: dense::DFA<&[u32]> = dense::DFA::from_bytes(&DFA_REV_BYTES).expect("Failed to convert bytes to DFA").0;
     let re = AutomataRegex::builder().build_from_dfas(fwd, rev);
 

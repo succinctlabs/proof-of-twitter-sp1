@@ -1,4 +1,4 @@
-use regex_automata::{dfa::{dense, regex::Regex}, Match};
+use regex_automata::{dfa::{dense::DFA, regex::Regex}, Match};
 use std::fs::File;
 use std::io::Write;
 
@@ -7,10 +7,25 @@ use std::io::Write;
 // and saves them into binary files.
 fn main() {
     let re = Regex::new(r"This email was meant for (@\w+)").unwrap();
-    let (fwd_bytes, _) = re.forward().to_bytes_native_endian();
-    let (rev_bytes, _) = re.reverse().to_bytes_native_endian();
-    let mut file = File::create("dfa_fwd_bytes.bin").unwrap();
-    file.write_all(&fwd_bytes).unwrap();
-    let mut file = File::create("dfa_rev_bytes.bin").unwrap();
-    file.write_all(&rev_bytes).unwrap();
+    // #[repr(C)]
+    // struct Aligned<B: ?Sized> {
+    //     _align: [u32; 0],
+    //     bytes: B,
+    // }
+    // let mut buf_fwd = Aligned { _align: [], bytes: [0u8; 4 * (1<<10)] };
+    // let mut buf_rev = Aligned { _align: [], bytes: [0u8; 4 * (1<<10)] };
+    // let written_fwd = re.forward().write_to_native_endian(&mut buf_fwd.bytes).expect("Failed to write DFA to buffer");
+    // let written_rev = re.reverse().write_to_native_endian(&mut buf_rev.bytes).expect("Failed to write DFA to buffer");
+    // let mut file = File::create("dfa_fwd_bytes.bin").unwrap();
+    // file.write_all(&buf_fwd.bytes[..written_fwd]).unwrap();
+    // let mut file = File::create("dfa_rev_bytes.bin").unwrap();
+    // file.write_all(&buf_rev.bytes[..written_rev]).unwrap();
+    let (fwd_bytes, fwd_pad) = re.forward().to_bytes_little_endian();
+    let (rev_bytes, rev_pad) = re.reverse().to_bytes_little_endian();
+    // let mut file = File::create("dfa_fwd_bytes.bin").unwrap();
+    // file.write_all(&fwd_bytes[fwd_pad..]).unwrap();
+    // let mut file = File::create("dfa_rev_bytes.bin").unwrap();
+    // file.write_all(&rev_bytes[rev_pad..]).unwrap();
+    std::fs::write("dfa_fwd_bytes.bin", &fwd_bytes[fwd_pad..]).unwrap();
+    std::fs::write("dfa_rev_bytes.bin", &rev_bytes[rev_pad..]).unwrap();
 }
