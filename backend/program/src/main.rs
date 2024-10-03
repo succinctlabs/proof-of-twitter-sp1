@@ -32,6 +32,7 @@ static REV_ALIGNED: &AlignAs<[u8], u32> = &AlignAs {
     bytes: *include_bytes!("../../../generate_regex_bin/dfa_rev_bytes.bin"),
 };
 
+// The seriallized DFA regex for "This email was meant for (@\w+)".
 static DFA_FWD_BYTES: &[u8] = &FWD_ALIGNED.bytes;
 static DFA_REV_BYTES: &[u8] = &REV_ALIGNED.bytes;
 
@@ -46,7 +47,7 @@ pub fn main() {
     let signature_verified = verify_signature(&dkim);
     let from_address_verified = verify_from_address(&dkim);
     let is_pw_reset_email = verify_pw_reset_email(&dkim);
-    let twitter_username = get_twitter_username(&dkim, &re); // blank string if no/invalid twitter username
+    let twitter_username = get_twitter_username(&dkim, &re); 
     let twitter_proved = body_verified
         && signature_verified
         && from_address_verified
@@ -170,6 +171,6 @@ fn get_twitter_username(dkim: &DKIM, re: &AutomataRegex<dense::DFA<&[u32]>>) -> 
     }
     else {
         println!("No twitter username found");
-        return String::new();
+        return String::new(); // blank string if no/invalid twitter username
     }
 }
